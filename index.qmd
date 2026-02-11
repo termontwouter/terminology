@@ -1,0 +1,255 @@
+---
+title: Operational definitions and model of identity
+# Scope to identity descriptions in standards and regulations
+---
+
+## How to read this document
+
+The following typographical conventions are used in this book:
+
+*Italic*
+: Indicates new terms, URLs, email addresses, filenames, and file extensions.
+
+`Constant width`
+: Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords.
+
+**`Constant width bold`**
+: Shows commands or other text that should be typed literally by the user.
+
+*`Constant width italic`*
+: Shows text that should be replaced with user-supplied values or by values determined by context.
+
+
+## Identity
+
+Entities
+: Anything that has measureable *attributes* (characteristics) by which it can be *represented* (named, described) and *distinguished* (recognized) in a relevant domain of applicability [@iso:24760;@iso:24765;@ietf:rfc4949].
+<!-- Entity (a.k.a. Thing, Object)
+origin/source/ground/base/foundation/matter/substance/permanence/remainder
+nature/kind/character/essence/species/sort/type/class/structure/category/model/form/pattern/standard
+qualities/properties/marks/signs/attributes/particular/
+: A conceptual unity to which  ... are attributed. can in be distinguished from something else, within some domain of applicability. -->
+
+Attribute
+: Any unique piece of information that *associates* an entity with a measurable *value* of a particular *type* [@iso:27000;@cnss:i4009;@iso:24765;@ietf:rfc4949;@oecd:govdi;@eu:eidas].
+<!-- While most definitions of the term *attribute* turn out to be circular or self-referential,^[Respectively, depending on *identity*, or on -- not otherwise defined -- variations of itself (e.g., feature, quality, characteristic)] -->
+
+Identity
+: Any *well-defined subset* of those characteristics, that together suffice to *actually* represent that entity and uniquely distinguish it from any other entity within a concrete context (domain) [@ietf:rfc6973;@nist:sp800-63;@nist:fips201;@cnss:i4009;@oecd:govdi].
+<!-- ^[While this is a general definition, we use the term 'identity' throughout this text to refer to '*digital* identity' in particular: identity as captured, processed, and used within electronic system.] -->
+<!-- An entity potentially has multiple *proper* identities too, both in different contexts as within a single one.  -->
+
+Partial identity
+: Any set of attributes [@iso:24760].
+<!-- Since any set of attributes, of which several entities share the same, can be extended to a (minimal) distinguishing superset,  -->
+<!-- [@freehaven:terms]{.author.} express this in a witty way: "An identity is any subset of attributes of an individual which identifies this individual within any set of individuals. So usually there is no such thing as 'the identity', but several of them." [@freehaven:terms] -->
+<!-- Interestingly, partial identity immediately implies (partial) anonymity (Although: While identity can be qualified as partial, anonymity is typically not; though one could conceive of *full* anonymity as the state in which the anonymity set contains all entities of the domain.) -->
+<!-- An entity potentially has multiple *proper* identities too, both in different contexts as within a single one.  -->
+
+Anonymity
+: "A state of an individual in which an observer \[...] cannot identify \[it] within a set of other individuals" [@ietf:rfc6973].
+
+Anonymity set
+: "\[A] set of individuals that have the same attributes, making them indistinguishable from each other \[for a particular observer]" [@ietf:rfc6973].
+<!-- It is clear that any nontrivial entity has many partial identities, and therefore many different anonymity sets. -->
+<!-- To count as anonymized data under EU legislation [@eu:gdpr], the process obtaining the partial identity -- thereby removing actual identifiability -- from the proper one must be (reasonably) irreversible. -->
+
+Identifier
+: A *minimal* (i.e., irreducible) identity, in which the removal of a single attribute reduces it to a mere *partial* identity.
+<!-- This aligns with the recurring view that identifiers represent (other) *identities* -- larger (super)sets of attributes -- rather than *entities* [@iso:24760;@iso:24765;@openid:connect;@nist:fips201;@cnss:i4009;@w3c:identity]. -->
+<!-- A number~of sources emphasize the distinction between identities and identifiers [@w3c:identity;@oasis:glossary], but they fail to point out the precise difference: both are unique sets of characteristics. While they are often atomic strings (e.g., labels, serial numbers, indexes), they can also be more complex or combined attribute structures (e.g., names, addresses, bibliographic references) [@iso:24765;@ietf:rfc4949;@cnss:i4009]. -->
+
+Party
+: "One or more \[entities] participating in some process or communication" [@oasis:glossary], which are "considered to have \[at least] some of the rights, powers, and duties of a natural person" [@iso:24760].
+<!-- They are a natural or legal person that has agency, and can therefore be held "responsible for their actions and the actions of their agents" [@iso:24765]. -->
+
+(User) session
+: A continuous period of transactions between an entity and an information system [@ietf:rfc4949].]
+
+Principal (user)
+: The particular identity by which the active party is known in the context of a specific (user) session [@ietf:rfc2828;@cnss:i4009;@ietf:rfc4949;@ietf:rfc6973;@iso:24760].
+
+Persona / Pseudonymous identity
+: A principal that can be "associated with multiple interactions with \[the same entity]" [@nist:sp800-63], viz. because they contain at least "the minimal identity information sufficient to \[...] establish it as a link" [@iso:24760](see also [@cnss:i4009;@w3c:vc]), but which do not let the verifier infer anything else regarding that entity [@nist:sp800-63], such as the entity's identifier at another relying parties [@openid:connect].
+<!-- Called a psuedonym when it concerns a privacy-preserving *identifier* [@oasis:glossary]  -->
+<!-- Some sources hold pseudonyms and personas to conceal or protecting an entity's *true identity* [@cnss:i4009;@ietf:rfc4949] However, it is unclear what such a '*true* identity' would be. -->
+<!-- In EU law [@eu:gdpr], data is called pseudonymized if on its own it can not be attributed to a specific subject entity, but -- unlike anonymized data -- it can be (reasonably) reversed into a proper identity when in the possession of additional information. -->
+
+
+## Authentication
+
+Identification
+: The act of *presenting* identity information to a system -- making **claims** about the attributes of an entity (the **subject**)[^fn-identification] -- and the system subsequently *validating*[^fn-validation] the collected information in order to *recognize* the represented entity -- as (uniquely) distinct within a context [@iso:24760;@nist:sp800-63;@cnss:i4009;@ietf:rfc2828;@ietf:rfc4949].
+<!-- In the context of identification, the subject is typically the principal itself, and the claims contained in the certificate are *identity information* [@openid:vci;@iso:29100;@ietf:rfc4949]. Because of this, the terms *subject* and *principal* are often used interchangeably [@nist:sp800-63;@cnss:i4009;@ietf:rfc3198;@iso:24760]. -->
+
+Verification
+: The process of presenting **evidence** and checking it against previously corroborated information associated with it [@iso:24765;@iso:29115;@nist:fips201], in order to determine the *truth* or *accuracy* of an (atomic) statement (e.g., fact, claim, value, signature, integrity) [@ietf:rfc4949;@openid:connect], by **proving** the "binding between the attribute and \[the entity] for which it is claimed" [@ietf:rfc4949;@iso:29115].
+
+Validation
+: The process of **approving** of something (e.g., data structures, relationships), typically after *verifying* whether it satisfies certain *requirements* (e.g., soundness, correctness, completeness, consistency), often in *compliance* with some specification (e.g., standard, convention) [@ietf:rfc4949;@iso:24765].
+<!-- In case of *identification* (certificates), it involves checking whether all required attributes, needed to recognize an entity in a domain, are *present*, have the *correct syntax*, and are *not expired* [@iso:24760]. -->
+
+Origin / source
+: ...
+
+Integrity
+: The "constancy of and confidence in data values," i.e., the assurance that the data has not been altered (e.g., changed, destroyed, lost) in an unauthorized (or accidental) manner since it was created. [@ietf:rfc4949;@nist:sp800-57;@nist:sp800-152].
+
+Authenticity
+: The property of "being genuine and able to be verified and be trusted" [@ietf:rfc2828;@ietf:rfc4949;@cnss:i4009], which, in the case of data, ensures confidence in its validity, its source (origin), and its transmission (integrity) [@nist:sp800-63].
+
+Authentication
+: The (formal) process of establishing a sufficient level of *assurance* in the **authenticity** of an entity [@oasis:glossary;@openid:connect;@iso:24760;@nist:fips201;@oecd:govdi]. It involves **verifying** the *origin* (i.e., source) and *integrity* of information [@cnss:i4009;@nist:sp800-57;@nist:sp800-175;@ietf:rfc4949;@eu:eudi], in order to determine the *binding* between the presented claims [@openid:connect;@iso:24760;@nist:sp800-57;@nist:sp800-175;@ietf:rfc4949;@ietf:rfc1983;@nist:fips200;@iso:29115;@nist:sp800-63;@ietf:rfc2504;@oasis:glossary].
+<!-- In the context of (user) identification, authentication determines "the degree to which the identity \[...] can be proved to be the one claimed" [@iso:24765], typically by ensuring that the entity controls (e.g., is, possesses, or knows) a valid token (authenticator), bound to their account -- e.g., "the private key of a previously-registered public key" [@w3c:webauthn] -- to demonstrate that they are associated with that account [@nist:sp800-63]. -->
+<!-- A few sources claim that the term is ambiguous, being either about *identity* (entity authentication), or about *integrity* (data authentication), or *origin* (source authentication) [@ietf:rfc4949;@nist:sp800-175;@nist:sp800-57]. However, such a distinction misrepresents any of these 'specific' processes as not including the other. To the contrary, it is impossible to check the origin of data without determining its integrity, and vice versa; and likewise, it is not possible to verify an identity without assuring its integrity and origin. -->
+<!-- While authentication is therefore always a form of *(id)entity verfication*, it does not only apply to user identity: "\[it] may involve any type of attribute \[...] \[claimed] on behalf of a subject or object by some other \[entity]" [@ietf:rfc4949]. -->
+<!-- Note that successful authentication does not imply that the verifier knows the concrete identity of an individual user. It only guarantees the relying party that, when multiple sessions involve the same authenticated attributes, these sessions can pertain to the same principal. The natural person behind that principal might, however, not always be the same [@w3c:webauthn]. -->
+
+Life cycle
+: The sequence of different stages involved in the management of information: its collection, initial authentication (*proofing*), and registration (storage) -- in case of a *digital identity lifecycle* also together called *enrollment* [@oecd:govdi] -- as well as its storage, issuance, revocation, expiration, preservation, and termination [@iso:24760;@ietf:rfc4949;@nist:sp800-63;@cnss:i4009].
+
+Primary source / Authoritative source
+: The party who manages the life cycle of information, keeping it accurate and up-to-date [@iso:29115].
+
+Certificate
+: A (signed) document "attesting to the truth of certain stated facts" [@nist:fips201]. They typically consist of two distinct types of information: the actual information, as one or more **assertions**, and **attestation** information.
+
+(Verifiable) credential / (Electronic) attestation of attributes
+: A certificate that asserts information about the principal themself [@eu:arf;@eu:eudi;@iso:24760;@ietf:rfc6973;@ietf:rfc2828;@oasis:glossary;@oecd:govdi].
+<!-- In [@sec-politics], we discuss different kinds of EAAs, and go deeper into the nature of trust services and their providers. -->
+
+(Verifiable) presentation
+: A selection of assertions (derived) from one or more certificates [@w3c:vc;@openid:vp], typically bound to (a key of) the holder -- to prove their legitimate possession of the certificate in question [@openid:vp].
+
+(Certificate/credential) issuer / provider
+: The party who generates (signed) documents (**certificates**) asserting the information, and provide them to principals [@ietf:rfc4949;@w3c:vc;@openid:connect;@openid:vci;@openid:vp;@iso:24760;@iso:24765;@nist:fips201;@nist:sp800-63;@eu:eidas].
+
+(Certificate/credential) holder
+: The principal to whom a certificate it was issued, who controls it [@nist:sp800-103], and who can transmit it to third parties as **(verifiable) presentations** [@w3c:vc;@openid:vci;@openid:vp;@nist:sp800-63].
+<!-- It is often assumed that "the holder of a credential \[...] presenting the claims \[to] the verifier is (controlled by) the subject of the claims" [@openid:security]. Some sources note certain exceptions, in which "claims in a credential can be about different subjects," not limited to assertions about the principal presenting them [@w3c:vc]; or in which the holder is not the subject of the claims (e.g., a parent presenting their child's birth certificate) [@openid:security]. These cases are in essence an abstraction from credentials towards certificates in general, though, and often lack technical support. -->
+
+(Certificate/credential) verifier / Relying party
+: The third party service provider, who receives a (verifiable) presentation from a principal, and performs verification to assess its authenticity [@openid:vci;@openid:vp;@iso:24760;@w3c:vc]. It trusts and *relies* on a system of digital identity solutions to confirm the validity of the assertions [@iso:24760;@oasis:glossary;@ietf:rfc4949;@w3c:vc;@oecd:govdi].
+
+(Certification) authorities
+: Third-party *trust service provider* [@eu:eidas] that vouch for the authenticity (integrity and accuracy) of information. They are often the *authoritative sources* as well as the *issuers* of the information, and provide them to principals [@ietf:rfc4949;@w3c:vc;@openid:connect;@openid:vci;@openid:vp;@iso:24760;@iso:24765;@nist:fips201;@nist:sp800-63;@eu:eidas].
+
+Credential service provider / Identity provider
+: A certification authority that asserts information about the principal themself [@eu:arf;@eu:eudi;@iso:24760;@ietf:rfc6973;@ietf:rfc2828;@oasis:glossary;@oecd:govdi].
+
+
+## Certificates
+
+Assertion
+: A claims made by an authority about the *subject*, associating it with certain attribute values [@oasis:glossary;@oasis:saml;@w3c:vc;@openid:vci;@openid:connect].
+
+Attestation
+: Evidential (meta-)statements that describe the **authentication context** [@ietf:rfc4949;@iso:24760;@iso:24765;@iso:29115@cnss:i4009;@nist:fips201;@nist:sp800-63].
+
+Authentication context
+: All the "information that the relying party can require before it makes \[a] decision with respect to an authentication" [@openid:connect]. This includes the verification and revocation methods, level of assurance, security characteristics, and all **verification factors** [@ietf:rfc4949;@iso:24760;@iso:24765;@iso:29115@cnss:i4009;@nist:fips201;@nist:sp800-63].
+
+Verification factor
+: A parameter (i.e., a piece of information) needed to "verify the security of cryptographically protected information" [@w3c:vc]. These factors bind the asserted claims together, to the issuer and -- in case of credentials -- to the principal [@ietf:rfc4949;@iso:24760;@iso:24765;@iso:29115@cnss:i4009;@nist:fips201;@nist:sp800-63].
+
+Holder binding
+: A mechanism that ties certificates to their holder, through the addition of holder-related verification factors.
+<!-- This additional attestation information serves as evidence, to be corroborated with information known to be in control of the legitimate holder. It can be something the holder *has* or *knows*, or something they *are* or (typically) *do* [@iso:29115], including traditional accounts (e.g., password-based), cryptographic material (e.g., keys), biometric information (e.g., fingerprints), or any other claim linking the credential in question to information (i.e., another credential) of which the holder's identity has already been established [@openid:vci;@openid:security].  -->
+<!-- After all, relying parties typically require information to be about the user they actually interact with during a session. Without this guarantee, malicious parties can abuse credentials (obtained through a data leak or other security breach) to impersonate someone else [@openid:security]. These scenarios underlie the idea of ***'legitimate'* holders** of a credential, often -- but not always -- the subject. -->
+<!-- OpenID emphasizes that it is "important to distinguish between the information that the credential holds (about the subject) and the information that the credential is bound to (about the holder)" [@openid:security]. -->
+
+Identity-based access control
+: An access control paradigm ... In it's strict form ...
+
+Role
+: A formal placeholder for a *functional position* in which entities can participate in interactions [@ietf:rfc4949;@iso:24765]. They are characterized by constraints on the behavior expected in a specific situation -- a set of *connected actions* expressing *situation-dependent* attributes [@freehaven:terms] -- and are typically expressed as a pre-established collection of applicable policy rules [@ietf:rfc4949;@ietf:rfc3198;@iso:24765].
+
+Role certificate
+: A certificat that only asserts that the entity is "\[a] member of the set of \[entities] that have identities that are assigned to the same role" [@ietf:rfc4949].
+
+Role-based access control
+: A less strict variant of the identity-based access control paradigm, in which entities are assigned roles, and issued *role certificates* in place of individual identifiers [@ietf:rfc7642]. Which roles are distinguished depends entirely on "the context of a function delivered by a particular application" [@auth0:glossary].
+<!-- One could even go so far as to say that *roles **are** (partial) identities*, which can be assumed by different entities [@aws:iam].  -->
+
+
+## Sources
+
+<!-- Major Standards Development Organizations (SDOs) mentioned in this section include: the World Wide Web Consortium (W3C); the OpenID Foundation (OpenID); the Organization for the Advancement of Structured Information Standards (OASIS); the International Organization for Standardization (ISO) and International Electrotechnical Commission (IEC), in particular their Joint Technical Committee 1 (JTC1); the National Institute of Standards and Technology (NIST); and the Committee on National Security Systems (CNSS). -->
+
+European regulations:
+
+- [@eu:eidas]{.title-short.} (eIDAS) [@eu:eidas]
+- [@eu:eudi]{.title-short.} (EUDI) [@eu:eudi]
+- [@eu:arf]{.title-short.} (ARF) [@eu:arf;@eu:toolbox]
+
+Technical standards:
+
+- W3C
+  -  [@w3c:did]{.title-short.} (DID) [@w3c:did]
+  -  [@w3c:vc]{.title-short.} (VC) [@w3c:vc]
+  -  [@w3c:credapi]{.title-short}
+  -  [@w3c:fedcm]{.title-short.} (FedCM) [@w3c:fedcm]
+
+- OpenID
+  - [@openid:connect]{.title-short.} (OIDC) [@openid:connect]
+  - [@openid:vci]{.title-short.} (OpenID4VCI) [@openid:vci]
+  - [@openid:vp]{.title-short.} (OpenID4VP) [@openid:vp]
+
+- OASIS
+  - [@oasis:glossary]{.title-short.} (SAML) [@oasis:glossary]
+
+- OECD
+  - [@oecd:govdi]{.number.} [@oecd:govdi]
+
+- ISO/IEC
+  - [@iso:24760]{.number.} ([@iso:24760]{.title-short.}) [@iso:24760]
+  - [@iso:24765]{.number.} ([@iso:24765]{.title-short.}) [@iso:24765]
+
+- NIST
+  - [@nist:fips200]{.number.} ([@nist:fips200]{.title-short.}) [@nist:fips200]
+  - [@nist:fips201]{.number.} ([@nist:fips201]{.title-short.}) [@nist:fips201]
+  - [@nist:sp800-63]{.number.} ([@nist:sp800-63]{.title-short.}) [@nist:sp800-63]
+  - [@nist:sp800-103]{.number.} ([@nist:sp800-103]{.title-short.}) [@nist:sp800-103]
+
+- CNSS
+  - [@cnss:i4009]{.number.} ([@cnss:i4009]{.title-short.}) [@cnss:i4009]
+
+Meta-standards \& glossaries:
+
+- W3C
+  - [@w3c:glossary]{.title-short.} [@w3c:glossary]
+
+- IETF
+  - [@ietf:rfc1983]{.number.} ([@ietf:rfc1983]{.title-short.}) [@ietf:rfc1983]
+  - [@ietf:rfc2828]{.number.} ([@ietf:rfc2828]{.title-short.}) [@ietf:rfc2828]
+  - [@ietf:rfc3198]{.number.} ([@ietf:rfc3198]{.title-short.}) [@ietf:rfc3198]
+  - [@ietf:rfc4949]{.number.} ([@ietf:rfc4949]{.title-short.}) [@ietf:rfc4949]
+  - [@ietf:rfc6973]{.number.} ([@ietf:rfc6973]{.title-short.}) [@ietf:rfc6973]
+  - [@ietf:rfc7642]{.number.} ([@ietf:rfc7642]{.title-short.}) [@ietf:rfc7642]
+
+- OASIS
+  - [@oasis:identity]{.title-short.} [@oasis:identity]
+
+- Future of Identity in the Information Society* (FIDIS)
+  - [@fidis:journal]
+  - [@fidis:book]
+
+- TU Delft
+  - [@freehaven:terms]
+
+- Wheeler \& Wheeler
+  - [@wheeler:security]{.title.} [@wheeler:security]
+  - [@wheeler:privacy]{.title.} [@wheeler:privacy]
+
+Other documents:
+
+- OpenID
+  - [@openid:govcreds]
+  - [@openid:govdi]
+
+
+## List of Acronyms
+
+...
+
+<!-- simple (SES), advanced (AES) and qualified (QES) electronic services -->

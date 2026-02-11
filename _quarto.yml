@@ -1,0 +1,35 @@
+quarto-required: ">= 1.8.27"
+
+project:
+
+  type: default
+  title: Terminology
+
+  # output-dir: out
+  # lib-dir: libs
+
+filters: []
+
+format:
+  # html:
+  #   output-file: default.html
+  # computo-html:
+  #   output-file: computo.html
+  ieee-html:
+    output-file: index.html
+
+embed-resources: true
+self-contained: true
+self-contained-math: true
+
+code-links: false
+format-links: false
+notebook-links: false
+other-links: false
+
+pdf-engine: xelatex
+latex-tinytex: true
+latex-auto-install: true
+latex-auto-mk: true
+latex-clean: true
+keep-tex: true
