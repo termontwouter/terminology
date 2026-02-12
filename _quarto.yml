@@ -15,7 +15,9 @@ format:
   #   output-file: default.html
   # computo-html:
   #   output-file: computo.html
-  ieee-html:
+  # ieee-html:
+  #   output-file: ieee.html
+  bookup-html:
     output-file: index.html
 
 embed-resources: true

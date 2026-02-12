@@ -1,5 +1,6 @@
 /.quarto/
 /*_files/
+/fonts/
 **/*.quarto_ipynb
 *.tex
 *.html

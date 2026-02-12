@@ -14,3 +14,13 @@ Make sure the following tools are on the `PATH`:
 Then run:
 
 `quarto render`
+
+<!--
+## To do
+
+- Spec (doc)
+- Guide (web)
+- Visual (graph)
+
+- Encode eIDAS/EUDI-related terms for DPV
+-->

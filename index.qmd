@@ -1,9 +1,72 @@
 ---
-title: Operational definitions and model of identity
 # Scope to identity descriptions in standards and regulations
+title: Operational definitions and model of identity
+# subtitle: ...
+# short-title: ...
+author:
+  - id: termont
+    name:
+      given: Wouter
+      family: Termont
+    orcid: 0000-0002-2968-1394
+    email: wouter.termont@ugent.be
+    corresponding: true
+    attributes:
+      corresponding: true
+    affiliation:
+      - name: Ghent University -- imec
+        department: IDLab
+        group: Knowledge On Web Scale
+        url: https://knows.idlab.ugent.be/
+        country: BE
+        id: knows
+date: 2026-02-12
+date-modified: last-modified
+# thanks: |
+#   ...
+# published: ...
+# code-repo: <https://github.com/termontwouter/terminology>
+license: CC BY
+copyright:
+  holder: IDLab (UGent -- imec)
+  year: 2026
+citation:
+  type: webpage
+  issued: 2026-02-12
+  # available-date: 2026-02-12
+  # doi:
+  # url:
+  # pdf-url:
+lang: en-US
+langid: american
+csl: ieee
+bibliographystyle: ieee.csl
+bibliography: references.bib
+reference-section-title: References
+reference-location: document
+citation-location: document
+notes-after-punctuation: true
+link-citations: true
+# link-fields: false
+citeproc: false
+# nocite: |
+#   @*
+toc: true
+toc-depth: 2
+toc-location: right
+number-sections: true
+# shift-heading-level-by: -1
+# abbreviations: abbreviations.yml
+filters:
+  - nameref
+  - ./_extensions/bcdavasconcelos/citetools/citeproc.lua
+  - ./_extensions/bcdavasconcelos/citetools/citefield.lua
+  - ./_extensions/pandoc-lua-filters/pandoc-quotes.lua
+  # - abstract-section
 ---
 
-## How to read this document
+<!--
+# How to read this document
 
 The following typographical conventions are used in this book:
 
@@ -18,17 +81,17 @@ The following typographical conventions are used in this book:
 
 *`Constant width italic`*
 : Shows text that should be replaced with user-supplied values or by values determined by context.
+ -->
 
+# Identity
 
-## Identity
-
-Entities
+Entity
 : Anything that has measureable *attributes* (characteristics) by which it can be *represented* (named, described) and *distinguished* (recognized) in a relevant domain of applicability [@iso:24760;@iso:24765;@ietf:rfc4949].
 <!-- Entity (a.k.a. Thing, Object)
 origin/source/ground/base/foundation/matter/substance/permanence/remainder
 nature/kind/character/essence/species/sort/type/class/structure/category/model/form/pattern/standard
 qualities/properties/marks/signs/attributes/particular/
-: A conceptual unity to which  ... are attributed. can in be distinguished from something else, within some domain of applicability. -->
+=> A conceptual unity to which  ... are attributed. can in be distinguished from something else, within some domain of applicability. -->
 
 Attribute
 : Any unique piece of information that *associates* an entity with a measurable *value* of a particular *type* [@iso:27000;@cnss:i4009;@iso:24765;@ietf:rfc4949;@oecd:govdi;@eu:eidas].
@@ -76,7 +139,7 @@ Persona / Pseudonymous identity
 <!-- In EU law [@eu:gdpr], data is called pseudonymized if on its own it can not be attributed to a specific subject entity, but -- unlike anonymized data -- it can be (reasonably) reversed into a proper identity when in the possession of additional information. -->
 
 
-## Authentication
+# Authentication
 
 Identification
 : The act of *presenting* identity information to a system -- making **claims** about the attributes of an entity (the **subject**)[^fn-identification] -- and the system subsequently *validating*[^fn-validation] the collected information in order to *recognize* the represented entity -- as (uniquely) distinct within a context [@iso:24760;@nist:sp800-63;@cnss:i4009;@ietf:rfc2828;@ietf:rfc4949].
@@ -138,7 +201,7 @@ Credential service provider / Identity provider
 : A certification authority that asserts information about the principal themself [@eu:arf;@eu:eudi;@iso:24760;@ietf:rfc6973;@ietf:rfc2828;@oasis:glossary;@oecd:govdi].
 
 
-## Certificates
+# Certificates
 
 Assertion
 : A claims made by an authority about the *subject*, associating it with certain attribute values [@oasis:glossary;@oasis:saml;@w3c:vc;@openid:vci;@openid:connect].
@@ -172,7 +235,7 @@ Role-based access control
 <!-- One could even go so far as to say that *roles **are** (partial) identities*, which can be assumed by different entities [@aws:iam].  -->
 
 
-## Sources
+# Sources {-}
 
 <!-- Major Standards Development Organizations (SDOs) mentioned in this section include: the World Wide Web Consortium (W3C); the OpenID Foundation (OpenID); the Organization for the Advancement of Structured Information Standards (OASIS); the International Organization for Standardization (ISO) and International Electrotechnical Commission (IEC), in particular their Joint Technical Committee 1 (JTC1); the National Institute of Standards and Technology (NIST); and the Committee on National Security Systems (CNSS). -->
 
@@ -248,7 +311,7 @@ Other documents:
   - [@openid:govdi]
 
 
-## List of Acronyms
+# List of Acronyms {-}
 
 ...
 
